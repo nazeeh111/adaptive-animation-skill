@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A signal finds a route</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#12282c;color:#f0eee4;font-family:system-ui,sans-serif}main{width:960px;height:540px;position:relative;overflow:hidden;padding:42px 48px;background:#12282c}h1{font-size:42px;line-height:1.1;letter-spacing:-1.4px;font-weight:550;margin:0}p{color:#b7c6c4;margin:13px 0;font-size:17px}svg{position:absolute;left:48px;top:140px;width:864px;height:290px;overflow:visible}path{fill:none;stroke:#506165;stroke-width:2.5}path.active{stroke:#f8a36b;stroke-width:4}rect{fill:#1d383d;stroke:#718488;stroke-width:1.5}text{fill:#f0eee4;font-size:18px;text-anchor:middle;dominant-baseline:middle}.small{font-size:13px;fill:#b7c6c4}.foot{position:absolute;bottom:32px;left:48px;right:48px;display:flex;justify-content:space-between;font-size:16px}.foot span:last-child{color:#b7c6c4}nav{padding:16px 48px;display:flex;gap:12px;align-items:center;max-width:960px}button,input{font:inherit}button{padding:8px 14px;color:#12282c;background:#f0eee4;border:0;border-radius:3px}button:focus-visible,input:focus-visible{outline:3px solid #f8a36b;outline-offset:3px}input{flex:1;accent-color:#f8a36b}output{min-width:55px}nav[hidden]{display:none}
+</style>
+<main id="causal" data-composition-id="causal" data-start="0" data-duration="8" data-width="960" data-height="540" aria-label="Illustrative signal routing explanation">
+<h1>A signal finds a route</h1><p>The decision changes the path. The destination stays clear.</p>
+<svg viewBox="0 0 864 290" role="img" aria-labelledby="diagram-title diagram-description">
+<title id="diagram-title">Signal routing with an optional review</title><desc id="diagram-description">An incoming signal reaches a decision. A signal needing review goes through Review before Delivery. A direct signal skips Review. Timing is illustrative.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" style="fill:#718488;stroke:none"/></marker></defs>
+<path id="incoming" d="M144 144 L288 144" marker-end="url(#arrow)"/><path id="review-path" d="M408 144 C460 144 450 52 508 52 L548 52" marker-end="url(#arrow)"/>
+<path id="direct-path" d="M408 144 C460 144 450 238 508 238 L608 238 C684 238 680 144 730 144" marker-end="url(#arrow)"/>
+<path id="review-delivery" d="M668 52 C720 52 680 144 730 144" marker-end="url(#arrow)"/>
+<path id="guide-incoming" d="M82 144 L348 144" visibility="hidden"/><path id="guide-review" d="M348 144 L408 144 C460 144 450 52 508 52 L608 52" visibility="hidden"/><path id="guide-reviewed" d="M608 52 L668 52 C720 52 680 144 730 144 L792 144" visibility="hidden"/><path id="guide-direct" d="M348 144 L408 144 C460 144 450 238 508 238 L608 238 C684 238 680 144 730 144 L792 144" visibility="hidden"/><circle id="token" cx="82" cy="144" r="8" fill="#f8a36b"/><g id="source"><rect x="20" y="111" width="124" height="66" rx="8"/><text x="82" y="144">Signal</text></g>
+<g id="decision"><rect x="288" y="111" width="120" height="66" rx="8"/><text x="348" y="144">Decision</text></g>
+<g id="review"><rect x="548" y="19" width="120" height="66" rx="8"/><text x="608" y="52">Review</text></g>
+<g id="delivery"><rect x="730" y="111" width="124" height="66" rx="8"/><text x="792" y="144">Delivery</text></g>
+<text class="small" x="485" y="13">Needs review</text><text class="small" x="535" y="271">Direct route</text>
+
+</svg>
+<div class="foot"><span id="caption">The signal enters.</span><span>Illustrative timing</span></div>
+</main>
+<nav id="controls" hidden aria-label="Animation controls"><button id="play" aria-pressed="false">Play</button><button id="restart">Restart</button><button id="route">Use direct route</button><input id="seek" aria-label="Time in seconds" type="range" min="0" max="8" step="0.01" value="0"><output id="time">0.00 s</output></nav>
+<script>
+const token=document.querySelector('#token'),caption=document.querySelector('#caption'),seek=document.querySelector('#seek'),time=document.querySelector('#time');
+let current=0,needsReview=true,playing=false,last=0,raf=0;
+const clamp=n=>Math.max(0,Math.min(1,n));const ease=n=>{n=clamp(n);return n*n*(3-2*n)};
+function point(id,progress){const path=document.getElementById(id);return path.getPointAtLength(path.getTotalLength()*ease(progress));}
+function light(id,on){document.getElementById(id).classList.toggle('active',on);}
+window.renderFrame=function(seconds){
+ current=Math.max(0,Math.min(8,Number(seconds)||0));let p;
+ light('incoming',current>=.7);light('review-path',needsReview&&current>=2.4);light('review-delivery',needsReview&&current>=5);light('direct-path',!needsReview&&current>=2.4);
+ document.querySelector('#review').style.opacity=needsReview?1:.4;
+ for(const [id,active] of [['decision',current>=2.1&&current<3.1],['review',needsReview&&current>=4.5&&current<5.7],['delivery',current>=6.9]]){const rect=document.querySelector('#'+id+' rect');rect.style.stroke=active?'#f8a36b':'#718488';rect.style.strokeWidth=active?'3':'1.5';}
+ if(current<2.4){p=point('guide-incoming',(current-.7)/1.7);caption.textContent=current<.7?'The signal enters.':'The signal reaches the decision.';}
+ else if(needsReview&&current<5){p=point('guide-review',(current-2.7)/1.8);caption.textContent='This signal needs a review.';}
+ else if(needsReview){p=point('guide-reviewed',(current-5.3)/1.6);caption.textContent=current<7?'Review clears the path to delivery.':'The signal arrives. The route remains visible.';}
+ else{p=point('guide-direct',(current-2.7)/3.8);caption.textContent=current<7?'This signal takes the direct route.':'The signal arrives. The route remains visible.';}
+ token.setAttribute('cx',p.x);token.setAttribute('cy',p.y);seek.value=current;time.textContent=current.toFixed(2)+' s';
+};
+const preference=matchMedia('(prefers-reduced-motion: reduce)');
+function stop(){playing=false;cancelAnimationFrame(raf);document.querySelector('#play').textContent='Play';document.querySelector('#play').setAttribute('aria-pressed','false');}
+function step(now){if(!playing)return;renderFrame(current+(now-last)/1000);last=now;if(current>=8){stop();return;}raf=requestAnimationFrame(step);}
+function play(){if(preference.matches)return;playing=true;last=performance.now();document.querySelector('#play').textContent='Pause';document.querySelector('#play').setAttribute('aria-pressed','true');raf=requestAnimationFrame(step);}
+function motionPreference(){if(preference.matches){stop();renderFrame(8);}document.querySelector('#play').disabled=preference.matches;}
+if(new URLSearchParams(location.search).get('preview')==='1'){
+ document.querySelector('#controls').hidden=false;
+ function fit(){const scale=Math.min(1,innerWidth/960);const main=document.querySelector('main');main.style.transformOrigin='top left';main.style.transform='scale('+scale+')';main.style.marginBottom=(540*(scale-1))+'px';document.querySelector('#controls').style.width='100%';document.querySelector('#controls').style.padding='16px';document.querySelector('#controls').style.flexWrap='wrap';}
+ fit();addEventListener('resize',fit);
+ document.querySelector('#play').onclick=()=>{if(playing)stop();else{if(current>=8)renderFrame(0);play();}};
+ document.querySelector('#restart').onclick=()=>{stop();renderFrame(preference.matches?8:0);};
+ document.querySelector('#route').onclick=()=>{stop();needsReview=!needsReview;document.querySelector('#route').textContent=needsReview?'Use direct route':'Use review route';renderFrame(preference.matches?8:0);};
+ seek.oninput=()=>{stop();renderFrame(seek.value);};preference.addEventListener('change',motionPreference);motionPreference();
+}
+// Capture never reads wall time or motion preferences. Only explicit preview uses a live clock.
+renderFrame(new URLSearchParams(location.search).get('preview')==='1'&&preference.matches?8:0);
+</script></html>

@@ -1,0 +1,38 @@
+{
+  "file": "animation/docs/causal-flow.mp4",
+  "bytes": 50973,
+  "sha256": "14457a3fcd23d06c35dfd751b8b0a8f29e2a2f7039e6a56e90c9c13d2cf82788",
+  "resolution": "960x540",
+  "fps": "30",
+  "nominal_fps": "30/1",
+  "duration_seconds": 8.0,
+  "codec": "h264",
+  "pixel_format": "yuv420p",
+  "audio_streams": 0,
+  "full_decode": "passed",
+  "visual_review": "Representative encoded frames inspected at 0, 1.1, 3, 3.5, 5, 6, 7 and 239/30 seconds. Full normal-speed human playback not performed.",
+  "listening_review": "Not applicable: intentionally silent with zero audio streams.",
+  "frame_rate_check": "Exact average stream rate; not an assertion of constant per-frame timestamps",
+  "duration_tolerance_seconds": 1e-06,
+  "video_frames": 240,
+  "expected_contract": {
+    "fps": "30",
+    "duration_seconds": 8.0,
+    "video_frames": 240
+  },
+  "contract_verification": "passed",
+  "source": {
+    "file": "examples/causal-flow/index.html",
+    "sha256": "7ecbd978a8af142d110bd73724fab8ecc4647757836947efbc9b792da58023cd",
+    "time_rule": "renderFrame(frame / 30), frame = 0..239",
+    "browser_version": "156.0.8078.48",
+    "gpu_disabled": true,
+    "source_unchanged_during_capture": true
+  },
+  "mobile_preview": {
+    "viewport": "390x844",
+    "document_scroll_width": 390,
+    "body_scroll_width": 390,
+    "horizontal_overflow": false
+  }
+}

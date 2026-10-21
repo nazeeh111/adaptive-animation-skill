@@ -1,0 +1,18 @@
+{
+  "ffmpeg": "ffmpeg",
+  "ffprobe": "ffprobe",
+  "node": "node",
+  "chrome": null,
+  "blender": "blender",
+  "manim_launcher": null,
+  "hyperframes_runner": null,
+  "hyperframes_rollback_runner": null,
+  "speech_python": "python3",
+  "speech_root": null,
+  "qwen_python": null,
+  "qwen_model": null,
+  "qwen_model_manifest": null,
+  "whisper_cli": "whisper-cli",
+  "whisper_model": null,
+  "whisper_vad_model": null
+}

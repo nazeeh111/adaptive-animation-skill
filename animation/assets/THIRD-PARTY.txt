@@ -1,0 +1,11 @@
+Bundled fonts: Inter and Newsreader, unchanged official Google Fonts binaries.
+See fonts/*-OFL.txt for SIL Open Font License1.1 terms and fonts/sources.json
+for exact source commit, URL, SHA256 and size. Retain these notices with copies.
+
+GSAP3.14.2: Copyright2025 GreenSock, all rights reserved. Unmodified local
+library copied from the existing tested studio composition. Its header retains
+https://gsap.com/standard-license. This library has separate terms from the fonts
+and original studio helper code. Do not represent the entire bundle as MIT.
+
+Research sources informed guidance; no taste-skill or Claude Motion engine,
+artwork, audio or reference-video assets are bundled.

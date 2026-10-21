@@ -1,0 +1,31 @@
+# Unreal and Twinmotion when the brief benefits
+
+Use these engines for a real scene requirement, not as mandatory finishing steps. Keep one Animation Studio entry point. Blender remains useful for original meshes, rigs, simulation and export; SVG/browser/Manim remain appropriate for their own briefs. Recheck installed versions and current official platform support before relying on an old recipe.
+
+## Choose by the work
+
+- **Unreal:** editable cinematic sequences, large spatial scenes, game/runtime interaction, real-time lighting or engine-native delivery. Use native Python editor commands for repeatable asset/sequence work before adding a server. Editor Python is not a packaged-game runtime.
+- **Twinmotion:** quick architectural/environment staging and camera presentations when its UI and content save authoring time. No general-purpose Twinmotion Python API has been established here. Use documented UI/import/export and prove the actual session.
+- **Blender:** original topology, deformation, rigs, procedural geometry, simulation and native offline rendering. Keep the original native authoring master when exporting to another engine.
+
+Observed15October2026: Unreal5.8.3CL58210709 and Twinmotion2026.1.0 are installed as universal arm64/x86_64 apps under `/Users/Shared/Epic Games`. Installation does not establish rendering quality or throughput. Current Mac UE5.8 docs list software Lumen on M1+, experimental hardware Lumen/MegaLights on M2+, and beta Nanite/VirtualShadowMaps on M2+. Twinmotion's Mac route differs: software Lumen only, no Path Tracer or VR. Installed Xcode27 is not qualified by UE5.8's current table; do not change toolchains merely from that comparison.
+
+## Native control and recovery first
+
+The retained task proof creates an original BasicShapes scene, a CineCamera and a48frame/24fps LevelSequence, saves `.umap`/`.uasset`, then loads them in a separate native process. It checks actors, nine transform channels/eighteen keys, timing and camera-cut binding. This is an asset/control proof without rendered pixels, shader compilation or MRQ quality evidence. Before a new cinematic, make a short shot through the actual selected renderer, inspect its image/motion, save and reopen the native project, and verify the encoded output contract.
+
+Use a fresh task-owned content-only project with only required plugins. The exercised commandlet uses `-run=pythonscript -nullrhi -NoShaderCompile` for asset work, a filesystem-only DDC graph with `-DDC=TaskLocal -DDC-NoDefaultGraph`, disabled Python pip/startup/remote execution, owned logs and a bounded process group. The filesystem cache root must be shorter than119characters. A short disposable cache addresses that native path limit; it is not a way around a denied permission. `-NoZenAutoLaunch` alone still permits an existing Zen connection. `-UserDir` does not redirect all Cocoa/global engine paths; `-nowrite` suppresses INI writes, not every write. Native app registration may require the native permission boundary. Preserve and diagnose a failed attempt before retrying.
+
+On this Mac, unattended crash reporter suppression after settings load requires `bSendUnattendedBugReports=False` under `/Script/UnrealEd.CrashReportsPrivacySettings` in **EditorSettings**, plus the equivalent explicit per-run INI override. Set AnalyticsPrivacySettings `bSendUsageData=False` there too. Parent `-NoAnalytics` alone did not prevent a reporter child on a fatal attempt. This is not a universal guard against early native/OS crash handling. Keep the original project/config and exact observed logs; don't promise isolation from flags alone.
+
+Native rotation keys exhibited precision conversion below0.000002degrees against authored doubles; compare physical values with a justified small angular tolerance, while checking channel identity, time, binding and unchanged packages independently. Do not replace a failed value check with a broad silent tolerance.
+
+Epic's installed UnrealMCP plugin is experimental and disabled by default. It was not enabled or listened to for this proof. If a later interactive task needs it, inspect live bind/address, toolsets and content transmission rules first. Do not install an unofficial server when the native command route is sufficient.
+
+## Interchange and actual deliverables
+
+Use a copy for exchange and retain native sources. Check scale/axes, camera, frame rate/range, skeleton, facial shapes, materials, lights and color at the receiver. Unreal glTF export omits morph-target animation and supports limited absolute LevelSequence transform tracks without blending. Twinmotion animated FBX/glTF import omits morph/blendshape animation, animated camera/light tracks and clips without meshes. Datasmith staging transfer is not a guaranteed animation roundtrip. A GLB does not replace an Unreal project or Blender rig.
+
+Keep `.uproject`, Config and Content plus authored scripts/receipts for Unreal recovery; omit generated caches, Saved/Intermediate folders and engine binaries. Do not bundle Epic engine source or built-in content exports as if they were original freely licensed assets. Installed access is not proof every commercial or cloud use qualifies. Use existing authorized local access, no seat purchase/cloud trial/paid call.
+
+Current sources: [UE Mac requirements](https://dev.epicgames.com/documentation/en-us/unreal-engine/macos-development-requirements-for-unreal-engine), [editor Python](https://dev.epicgames.com/documentation/en-us/unreal-engine/scripting-the-unreal-editor-using-python), [Sequencer Python](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-scripting-in-sequencer-in-unreal-engine), [Movie Render Pipeline](https://dev.epicgames.com/documentation/en-us/unreal-engine/movie-render-pipeline-in-unreal-engine), [UE glTF limits](https://dev.epicgames.com/documentation/en-us/unreal-engine/how-the-gltf-exporter-handles-unreal-engine-content), [Twinmotion Mac requirements](https://dev.epicgames.com/documentation/en-us/twinmotion/hardware-and-software-specifications-for-twinmotion), [animation limits](https://dev.epicgames.com/documentation/en-us/twinmotion/animation-overview), [licensing](https://www.unrealengine.com/license), [Twinmotion licensing](https://www.twinmotion.com/license). These are external documents, not locally reproduced feature benchmarks.

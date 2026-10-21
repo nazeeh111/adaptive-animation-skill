@@ -1,0 +1,10 @@
+private/
+presentation-build/
+TASK_STATE.md
+**/__pycache__/
+*.py[cod]
+.DS_Store
+node_modules/
+**/scripts/local.json
+**/.hyperframes/
+presentation/
