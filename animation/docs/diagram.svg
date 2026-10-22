@@ -2,15 +2,15 @@
 <title id="diagram-title">Adaptive animation production workflow</title>
 <desc id="diagram-description">The main path runs from brief through craft, build, render and review. A passed review leads to packaging and a receiving-application check, then delivery. Review findings loop to craft. Handoff defects loop to build. Simple work can combine stages. Branch labels identify success and revision paths.</desc>
 <defs>
-<marker id="arrow-main" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L11 6 L1 11 Z" fill="#086B60"/></marker>
-<marker id="arrow-revise" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L11 6 L1 11 Z" fill="#B84E32"/></marker>
+<marker id="arrow-main" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L11 6 L1 11 Z" fill="#006F70"/></marker>
+<marker id="arrow-revise" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L11 6 L1 11 Z" fill="#7248B4"/></marker>
 </defs>
-<rect id="background" width="1600" height="1100" fill="#F6F2EB"/>
-<g id="heading" font-family="Arial, Helvetica, sans-serif" fill="#18201E">
+<rect id="background" width="1600" height="1100" fill="#F4F7FA"/>
+<g id="heading" font-family="Arial, Helvetica, sans-serif" fill="#16242B">
 <text x="64" y="93" font-size="49" font-weight="700">Adaptive animation production</text>
-<text x="66" y="145" font-size="25" fill="#4F615C">Choose the shortest useful path. Keep sources editable. Verify the actual result.</text>
+<text x="66" y="145" font-size="25" fill="#526773">Choose the shortest useful path. Keep sources editable. Verify the actual result.</text>
 </g>
-<g id="main-connections" fill="none" stroke="#086B60" stroke-width="3" marker-end="url(#arrow-main)">
+<g id="main-connections" fill="none" stroke="#006F70" stroke-width="3" marker-end="url(#arrow-main)">
 <path id="brief-to-craft" d="M300 290 H355"/>
 <path id="craft-to-build" d="M595 290 H650"/>
 <path id="build-to-render" d="M890 290 H945"/>
@@ -19,35 +19,35 @@
 <path id="package-to-receiver" d="M1360 640 V760"/>
 <path id="receiver-to-deliver" d="M1240 820 H1185"/>
 </g>
-<g id="revision-connections" fill="none" stroke="#B84E32" stroke-width="3" marker-end="url(#arrow-revise)">
+<g id="revision-connections" fill="none" stroke="#7248B4" stroke-width="3" marker-end="url(#arrow-revise)">
 <path id="review-to-craft" d="M1240 320 H1210 V448 H475 V350"/>
 <path id="receiver-to-build" d="M1360 880 V972 H30 V190 H770 V230"/>
 </g>
-<g id="primary-nodes" font-family="Arial, Helvetica, sans-serif" fill="#18201E">
-<g id="brief"><rect x="60" y="230" width="240" height="120" rx="4" fill="#F6F2EB" stroke="#18201E" stroke-width="2"/><text x="82" y="272" font-size="29" font-weight="700">1  Brief</text><text x="82" y="310" font-size="22" fill="#4F615C">Audience and output</text></g>
-<g id="craft"><rect x="355" y="230" width="240" height="120" rx="4" fill="#F6F2EB" stroke="#18201E" stroke-width="2"/><text x="377" y="272" font-size="29" font-weight="700">2  Craft</text><text x="377" y="310" font-size="22" fill="#4F615C">Story, staging, rhythm</text></g>
-<g id="build"><rect x="650" y="230" width="240" height="120" rx="4" fill="#F6F2EB" stroke="#18201E" stroke-width="2"/><text x="672" y="272" font-size="29" font-weight="700">3  Build</text><text x="672" y="310" font-size="22" fill="#4F615C">Native, usable source</text></g>
-<g id="render"><rect x="945" y="230" width="240" height="120" rx="4" fill="#F6F2EB" stroke="#18201E" stroke-width="2"/><text x="967" y="272" font-size="29" font-weight="700">4  Render</text><text x="967" y="310" font-size="22" fill="#4F615C">Explicit time + inputs</text></g>
-<g id="review"><rect x="1240" y="230" width="240" height="120" rx="4" fill="#F6F2EB" stroke="#18201E" stroke-width="2"/><text x="1262" y="272" font-size="29" font-weight="700">5  Review</text><text x="1262" y="310" font-size="22" fill="#4F615C">Meaning, media, state</text></g>
-<g id="package"><rect x="1240" y="520" width="240" height="120" rx="4" fill="#F6F2EB" stroke="#18201E" stroke-width="2"/><text x="1262" y="562" font-size="29" font-weight="700">6  Package</text><text x="1262" y="600" font-size="22" fill="#4F615C">Master + dependencies</text></g>
-<g id="receiver"><rect x="1240" y="760" width="240" height="120" rx="4" fill="#F6F2EB" stroke="#18201E" stroke-width="2"/><text x="1262" y="802" font-size="29" font-weight="700">7  Receiver</text><text x="1262" y="840" font-size="22" fill="#4F615C">Open and test edits</text></g>
-<g id="deliver"><rect x="945" y="760" width="240" height="120" rx="4" fill="#D7E5DC" stroke="#086B60" stroke-width="2"/><text x="967" y="802" font-size="29" font-weight="700" fill="#086B60">8  Deliver</text><text x="967" y="840" font-size="22">Files + checked limits</text></g>
+<g id="primary-nodes" font-family="Arial, Helvetica, sans-serif" fill="#16242B">
+<g id="brief"><rect x="60" y="230" width="240" height="120" rx="4" fill="#F4F7FA" stroke="#16242B" stroke-width="2"/><text x="82" y="272" font-size="29" font-weight="700">1  Brief</text><text x="82" y="310" font-size="22" fill="#526773">Audience and output</text></g>
+<g id="craft"><rect x="355" y="230" width="240" height="120" rx="4" fill="#F4F7FA" stroke="#16242B" stroke-width="2"/><text x="377" y="272" font-size="29" font-weight="700">2  Craft</text><text x="377" y="310" font-size="22" fill="#526773">Story, staging, rhythm</text></g>
+<g id="build"><rect x="650" y="230" width="240" height="120" rx="4" fill="#F4F7FA" stroke="#16242B" stroke-width="2"/><text x="672" y="272" font-size="29" font-weight="700">3  Build</text><text x="672" y="310" font-size="22" fill="#526773">Native, usable source</text></g>
+<g id="render"><rect x="945" y="230" width="240" height="120" rx="4" fill="#F4F7FA" stroke="#16242B" stroke-width="2"/><text x="967" y="272" font-size="29" font-weight="700">4  Render</text><text x="967" y="310" font-size="22" fill="#526773">Explicit time + inputs</text></g>
+<g id="review"><rect x="1240" y="230" width="240" height="120" rx="4" fill="#F4F7FA" stroke="#16242B" stroke-width="2"/><text x="1262" y="272" font-size="29" font-weight="700">5  Review</text><text x="1262" y="310" font-size="20" fill="#526773">Meaning, media, state</text></g>
+<g id="package"><rect x="1240" y="520" width="240" height="120" rx="4" fill="#F4F7FA" stroke="#16242B" stroke-width="2"/><text x="1262" y="562" font-size="29" font-weight="700">6  Package</text><text x="1262" y="600" font-size="22" fill="#526773">Master + assets</text></g>
+<g id="receiver"><rect x="1240" y="760" width="240" height="120" rx="4" fill="#F4F7FA" stroke="#16242B" stroke-width="2"/><text x="1262" y="802" font-size="29" font-weight="700">7  Receiver</text><text x="1262" y="840" font-size="22" fill="#526773">Open and test edits</text></g>
+<g id="deliver"><rect x="945" y="760" width="240" height="120" rx="4" fill="#DCEEEF" stroke="#006F70" stroke-width="2"/><text x="967" y="802" font-size="29" font-weight="700" fill="#006F70">8  Deliver</text><text x="967" y="840" font-size="22">Files + checked limits</text></g>
 </g>
 <g id="branch-labels" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">
-<text id="review-pass" x="1383" y="441" fill="#086B60">Meets the brief</text>
+<text id="review-pass" x="1383" y="441" fill="#006F70">Meets the brief</text>
 
-<text id="review-revise" x="712" y="425" fill="#B84E32">Finding: revise the beat</text>
-<text id="receiver-pass" x="962" y="722" fill="#086B60">Required controls survive</text>
-<rect x="922" y="947" width="366" height="46" fill="#F6F2EB"/>
-<text id="receiver-revise" x="942" y="979" fill="#B84E32">Defect: repair the handoff</text>
+<text id="review-revise" x="712" y="425" fill="#7248B4">Finding: revise the beat</text>
+<text id="receiver-pass" x="962" y="722" fill="#006F70">Required controls survive</text>
+<rect x="922" y="947" width="366" height="46" fill="#F4F7FA"/>
+<text id="receiver-revise" x="942" y="979" fill="#7248B4">Defect: repair the handoff</text>
 </g>
-<g id="acceptance-note" font-family="Arial, Helvetica, sans-serif" fill="#4F615C" font-size="25">
+<g id="acceptance-note" font-family="Arial, Helvetica, sans-serif" fill="#526773" font-size="25">
 <text x="66" y="607">Review the sequence at its intended pace.</text>
 <text x="66" y="651">Match checks to the risk; state unavailable evidence.</text>
 <text x="66" y="695">Keep the last valid render until the replacement succeeds.</text>
 </g>
-<g id="legend" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#4F615C">
-<path d="M66 1040 H126" stroke="#086B60" stroke-width="3" marker-end="url(#arrow-main)"/><text x="143" y="1048">Main path</text>
-<path d="M370 1040 H430" stroke="#B84E32" stroke-width="3" marker-end="url(#arrow-revise)"/><text x="447" y="1048">Revision path</text>
+<g id="legend" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#526773">
+<path d="M66 1040 H126" stroke="#006F70" stroke-width="3" marker-end="url(#arrow-main)"/><text x="143" y="1048">Main path</text>
+<path d="M370 1040 H430" stroke="#7248B4" stroke-width="3" marker-end="url(#arrow-revise)"/><text x="447" y="1048">Revision path</text>
 </g>
 </svg>

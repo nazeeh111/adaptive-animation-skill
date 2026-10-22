@@ -15,6 +15,8 @@ Checked 21 October 2026 on macOS with existing local tools. These are scoped obs
 
 The silent causal-flow movie was captured from unchanged source as 240 explicit frames at 30fps. Final H.264 yuv420p decoded at 960x540, 8.0 seconds, 240 frames, with no audio streams; all media contracts passed. Encoded representative frames were visually inspected. Mobile preview at 390x844 had no horizontal overflow. Full normal-speed human playback was not performed.
 
+On 22 October, the example's color was changed from peach to a cool signal accent. The current HTML was recaptured as 240 explicit frames; sampled backward seeks remained within the declared 16-pixel/12-channel tolerance, with no browser errors. The new H.264 movie passed full decode and the same 960x540/30fps/8.0-second/240-frame contract. Encoded frames at 0, 3, 6 and 7.9 seconds were inspected, and the 390px preview still had no horizontal overflow. The editable diagram SVG, PNG and vector PDF and the eight-slide PPTX were recolored consistently; the PDF and presentation were rendered and inspected after export. These checks verify this release's files, not artistic quality across requests.
+
 A final fresh-source starter render passed full decode and the 640x360 / 30fps / 6.0-second / 180-frame contract. Representative encoded title/motion/footer states were inspected after the final CSS and transform fixes.
 
 ## Delivery boundaries
