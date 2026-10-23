@@ -1,0 +1,73 @@
+{
+  "browser": "156.0.8078.48",
+  "samples": [
+    {
+      "angle": 0,
+      "bad": {
+        "bluePixels": 34076,
+        "goldPixels": 0
+      },
+      "good": {
+        "bluePixels": 34444,
+        "goldPixels": 0
+      },
+      "css": {
+        "badComputedTransformStyle": "preserve-3d",
+        "badOpacity": "0.6",
+        "goodComputedTransformStyle": "preserve-3d",
+        "goodOpacity": "1"
+      }
+    },
+    {
+      "angle": 60,
+      "bad": {
+        "bluePixels": 17892,
+        "goldPixels": 0
+      },
+      "good": {
+        "bluePixels": 17753,
+        "goldPixels": 0
+      },
+      "css": {
+        "badComputedTransformStyle": "preserve-3d",
+        "badOpacity": "0.6",
+        "goodComputedTransformStyle": "preserve-3d",
+        "goodOpacity": "1"
+      }
+    },
+    {
+      "angle": 120,
+      "bad": {
+        "bluePixels": 17892,
+        "goldPixels": 0
+      },
+      "good": {
+        "bluePixels": 0,
+        "goldPixels": 17849
+      },
+      "css": {
+        "badComputedTransformStyle": "preserve-3d",
+        "badOpacity": "0.6",
+        "goodComputedTransformStyle": "preserve-3d",
+        "goodOpacity": "1"
+      }
+    },
+    {
+      "angle": 180,
+      "bad": {
+        "bluePixels": 34076,
+        "goldPixels": 0
+      },
+      "good": {
+        "bluePixels": 0,
+        "goldPixels": 34614
+      },
+      "css": {
+        "badComputedTransformStyle": "preserve-3d",
+        "badOpacity": "0.6",
+        "goodComputedTransformStyle": "preserve-3d",
+        "goodOpacity": "1"
+      }
+    }
+  ]
+}

@@ -6,7 +6,7 @@ Distinguish display, supporting text, labels and captions with purposeful scale 
 
 ## Browser motion
 
-Use local `@font-face` aliases as the starter does. Declare the variable weight range and `font-synthesis:none`, so missing weights are visible rather than silently synthesized. Wait for font readiness in browser inspection. Verify actual rendered fonts through browser font/DOM inspection and compare final encoded glyphs. `document.fonts.check()` alone may return true for fallback, so combine it with the loaded FontFaceSet or actual platform font evidence and visual inspection. Do not fetch Google Fonts at render time.
+When using browser fonts, declare local `@font-face` aliases; the explicit orbit-title study demonstrates this. Declare the variable weight range and `font-synthesis:none`, so missing weights are visible rather than silently synthesized. Wait for font readiness in browser inspection. Verify actual rendered fonts through browser font/DOM inspection and compare final encoded glyphs. `document.fonts.check()` alone may return true for fallback, so combine it with the loaded FontFaceSet or actual platform font evidence and visual inspection. Do not fetch Google Fonts at render time.
 
 Preview h1 plus body and numeric samples at each delivery aspect ratio. Check text boxes throughout motion, not just at rest: masks and transforms can clip glyphs, and a shared background may cross behind text. Keep essential information readable within platform-specific safe areas; write these for the placement rather than assuming one universal margin. Persistent captions need enough exposure at normal narration speed. A screenshot cannot establish reading pace.
 

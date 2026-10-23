@@ -1,0 +1,14 @@
+# Scoped validation, 23 October 2026
+
+This records the focused motion-helper follow-up before the combined public release. The later release checks are recorded in [release validation](release-validation.md). No voice, native editor, source pack/recovery, color/alpha or legacy renderer code changed.
+
+- **Baseline reproduced:** the prior helper saw no motion at its fixed samples of a 12-second scene containing a 300 ms action at 2.0 to 2.3 seconds. All baseline sample hashes matched. A failed motion expectation was an under-sampling result, not proof that the scene was static.
+- **Five affected browser tests passed:** selected time samples detect the action; out-of-range times fail before capture; correct state restores after seeking backward; accumulating state fails; static scenes do not count noise as motion; existing reports cannot be overwritten. Default behavior remains covered. Test source and helper need existing Playwright, Sharp and Chrome.
+- **Six spring tests passed:** independent RK4 integration of the second-order equation checks dense, pseudorandom, backward and repeated samples. Tests cover position/velocity continuity, simultaneous targets, input immutability, validation, late settling and lightly damped/nearly critical coefficients. No framework implementation was copied.
+- **Current-source rendered proof:** a 3-second silent 960×540 film contains 90 actual frames at 30 fps and six authored retargets. All 90 SVG marker positions matched the helper. Explicit-time checks around every target change and a settled state passed exact repeated pixels. The proof's copied helper SHA256 matches the candidate. Full decode and exact frame/duration/rate checks passed.
+- **Parent visual inspection:** representative source frames show the requested target, responding marker, bounded velocity indicator and final state without clipping. This is selected-frame evidence, not normal-speed aesthetic or sound approval.
+- **Structural checks:** skill validation, relative reference targets and whitespace checks passed.
+
+The new helper supports only fixed underdamped scalar linear springs with zero initial velocity, not collisions, nonlinear clamps or changing coefficients. Browser diagnostics cover selected times and keep the existing declared raster tolerance, with optional exact mode. No comparative renderer or universal aesthetic superiority is established.
+
+Independent consumer review found no material defect within the stated replay contract. Helper import/backward-sampling and checker help also passed. The mathematical checks can be reproduced from `animation/tests/test_retargeted_spring.mjs`; browser regressions live in `animation/tests/test_motion_browser.py`. The rendered proof described above was a task-local validation artifact, not a public example or universal benchmark.

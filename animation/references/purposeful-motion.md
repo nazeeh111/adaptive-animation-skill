@@ -28,15 +28,25 @@ Use a resolved static view, transcript or meaningful stepping controls for a red
 
 ## Reliable code-authored pictures
 
+When a timing revision would otherwise touch scattered timestamps, name the meaningful cues in the existing project and derive the affected action, sound and captions from them. Native timeline labels, a small cue object or bound markers can suffice. Keep the intended reading/settling interval; do not force every action onto a beat or stretch speech to fit a visual preset. A marker alone does not retime unrelated keys or media.
+
+Separate global edit time, shot-relative time and transition progress. Overlapping shots share part of the edit: 40 and 60 frames with a 30-frame overlap make 70 frames, while an overlaid effect need not shorten it. Avoid applying a shot offset twice. These mechanisms work in existing native sources; they do not require a framework change.
+
 Offline rendering may evaluate frames in any order. Build each frame from explicit scene time, seeded inputs and authoritative assets, or seek baked state. Do not accumulate positions, emit particles on each seek, or treat a timeline callback as a durable drawing. GSAP seek suppresses callbacks by default. Prefer persistent visuals and explicit drawing; when callbacks are necessary, use callback-enabled evaluation and prove the image changes and restores after a backward seek. Repeated callbacks must not duplicate objects, retrigger sound or produce external side effects. A custom renderer may need an explicit draw function after timeline evaluation.
 
 Wait for fonts, images and the relevant video frame before capture. Probe the first frame, the interesting action, the cut boundary and a repeated earlier time after a later one. Compare rendered pixels, not only the timeline clock. Procedural motion should include a saved seed. For stateful simulation, replay fixed inputs or bake the actual cache; an arbitrary seed does not by itself make a seekable simulation.
 
-For live or interactive work, make time and input behavior explicit instead of forcing an offline model. Use elapsed time rather than frames for variable refresh. Pause idle rendering when practical. Dispose of owned Three.js geometries, materials, textures and listeners when replacing a scene; removing a mesh alone does not release GPU resources. Profile the target runtime before adding workers or reducing quality.
+For repeated target changes in a replayable interaction, [retargeted motion](retargeted-motion.md) explains an optional fixed-spring track and when the native runtime is a better choice. For live or interactive work, make time and input behavior explicit instead of forcing an offline model. Use elapsed time rather than frames for variable refresh. Pause idle rendering when practical. Dispose of owned Three.js geometries, materials, textures and listeners when replacing a scene; removing a mesh alone does not release GPU resources. Profile the target runtime before adding workers or reducing quality.
 
 For scientific work, identify measured data, a numerical model, a qualitative illustration or a metaphor. Bind units and scales to authoritative inputs and check discriminating states or invariants. A stress-colored shader is not evidence of a material solver or a validated engineering result.
 
 For seamless loops, check the mathematical endpoint against the start and inspect the final encoded frame followed by the first. Check nearby trajectories, speed, particle state and audio where material. Matching positions can conceal a speed kink or click. Encode a half-open interval rather than adding a duplicate endpoint frame merely to force equality.
+
+## Review the received story
+
+When an interpretation check can change the result, let a reviewer encounter the actual passage before reading the builder's explanation or automated findings. Supply the audience, purpose and authoritative references. Ask what happened, what caused the next event and where attention went, then compare that account with the brief. A layout capture made with reduced motion does not show the ordinary choreography.
+
+Tie a material critique to a time interval or interaction, its visible symptom, the audience consequence and a concrete source correction. Compare the revised passage at the same pace and check connected cuts or states. Preserve what worked. An attractive new preference alone does not justify reopening a resolved finding or an endless polish loop.
 
 ## Practical review questions
 
@@ -49,3 +59,5 @@ For seamless loops, check the mathematical endpoint against the start and inspec
 Choose only the checks relevant to the artifact. More activity and more automation do not establish better animation.
 
 Primary technical sources: [GSAP seek](<https://gsap.com/docs/v3/GSAP/Timeline/seek()/>), [Remotion frame determinism](https://www.remotion.dev/docs/flickering), [Three.js disposal](https://threejs.org/manual/pages/cleanup.html), [W3C pause/stop/hide](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html). The craft direction here is synthesis, not a claim these sources prove a universal aesthetic.
+
+Timing mechanisms: [Motion Canvas named cues](https://motioncanvas.io/docs/time-events/), [Remotion sequence offsets](https://www.remotion.dev/docs/sequence), [transition overlap](https://www.remotion.dev/docs/transitions/transitionseries). These sources inform authoring choices; no renderer comparison is implied.

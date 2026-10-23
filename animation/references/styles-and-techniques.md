@@ -1,8 +1,12 @@
 # Choose the animation language, not a house style
 
-Start from what the audience should see happen and what must remain editable. Select the look, motion logic and medium separately. A paper world can have smooth motion or deliberately stepped poses; a scientific diagram can be restrained or expressive. The bundled title study and fonts are optional materials. Do not carry its colors, split layout, typography or reveal into unrelated requests.
+Start from what the audience should see happen and what must remain editable. Select the look, motion logic and medium separately. A paper world can have smooth motion or deliberately stepped poses; a scientific diagram can be restrained or expressive. The explicitly selected orbit-title study and bundled fonts are optional materials. Do not carry its colors, split layout, typography or reveal into unrelated requests.
 
-Record only useful direction: subject-specific visual idea; references and what to learn from them; shape/material/color/type language; camera/pose rhythm; key action; delivery and editable source. Choose unspecified details yourself. A reference is evidence of a desired quality, not permission to copy its assets, artist identity or entire composition.
+For a static design or style frame, establish visual hierarchy, typography, spacing, color, contrast and meaningful image relationships at the intended viewing size. Test its focal point and reading order against the actual message. For motion design, carry those relationships through the action: a strong opening layout is insufficient if the important label becomes unreadable or the hierarchy reverses mid-transition. Preserve requested design layers and type when delivering editable sources.
+
+Record only useful direction: subject-specific visual idea; references and what to learn from them; shape/material/color/type language; camera/pose rhythm; key action; delivery and editable source. Choose unspecified details yourself. A reference is evidence of a desired quality, not permission to copy its assets, artist identity or entire composition. Keep observed choices separate from inferred rules and unknown behavior. A style catalog or screenshot cannot establish easing, hidden interaction states or rights to a brand's fonts and media; verify what this production actually depends on.
+
+Reusing capture or playback code does not justify reusing its composition. If changing names and colors leaves the same staging and movement intact, reconsider the direction unless the brief calls for a shared identity.
 
 ## Develop the idea before extending the pipeline
 

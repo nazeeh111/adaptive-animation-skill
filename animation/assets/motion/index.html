@@ -1,8 +1,6 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Editable motion study</title><link rel="stylesheet" href="style.css"></head>
-<body><main id="studio" data-composition-id="studio" data-start="0" data-duration="6" data-width="@WIDTH@" data-height="@HEIGHT@" style="width:@WIDTH@px;height:@HEIGHT@px">
-<div class="field" aria-hidden="true"><div class="orbit"></div><div class="seed"></div><div class="echo"></div></div>
-<div class="copy"><p class="context">An editable motion study</p><h1><span>Ideas deserve</span><br><em>to move.</em></h1><p class="support">A thought takes shape.<br>Then finds its rhythm.</p></div>
-<div class="endnote"><span>Built from type, time and motion.</span><span>6 seconds</span></div>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Motion composition</title><link rel="stylesheet" href="style.css"></head>
+<body><main id="studio" data-composition-id="studio" data-start="0" data-duration="@DURATION@" data-width="@WIDTH@" data-height="@HEIGHT@" style="width:@WIDTH@px;height:@HEIGHT@px" aria-label="Animation composition">
+<!-- Author the subject-specific scene here. Capture infrastructure supplies no artwork, copy, type pairing, palette or staging. -->
 </main>
-<nav id="preview" hidden aria-label="Preview controls"><button id="play">Play</button><button id="restart">Restart</button><input id="seek" aria-label="Time in seconds" type="range" min="0" max="6" step="0.01" value="0"><output id="time">0.00 s</output></nav>
+<nav id="preview" hidden aria-label="Preview controls"><button id="play" aria-pressed="false">Play</button><button id="restart">Restart</button><input id="seek" aria-label="Time in seconds" type="range" min="0" max="@DURATION@" step="0.01" value="0"><output id="time">0.00 s</output></nav>
 <script src="assets/gsap.min.js"></script><script src="motion.js"></script><script>window.__timelines.studio=tl;</script></body></html>

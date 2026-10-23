@@ -233,35 +233,42 @@ def initialize(args):
     if not brief:
         raise ValueError('Brief must contain text')
     width, height = args.size
+    if args.example and args.template != 'motion':
+        raise ValueError('--example requires --template motion')
+    if args.example and args.duration != 6:
+        raise ValueError('The orbit-title example is six seconds; omit --example to author another duration')
     template_files = []
     fonts = []
     if args.template == 'motion':
-        template_files = files_in(ROOT / 'assets/motion')
+        template_root = ROOT / ('assets/examples/orbit-title' if args.example else 'assets/motion')
+        template_files = files_in(template_root)
         if not any(relative.as_posix() == 'index.html' for _, relative in template_files):
             raise ValueError('Bundled motion template needs index.html')
-        fonts = files_in(ROOT / 'assets/fonts')
+        if args.example:
+            fonts = files_in(ROOT / 'assets/fonts')
         require_file(guard_ancestors(ROOT / 'assets/gsap.min.js'))
     guard_ancestors(project.parent)
     project.mkdir(parents=True, exist_ok=False)
     for folder in ('assets', 'audio', 'renders', 'delivery', 'source'):
         (project / folder).mkdir()
     write_json(project / 'studio.json', {'schema': 1, 'brief': brief, 'width': width,
-                                        'height': height, 'fps': args.fps, 'template': args.template})
+                                        'height': height, 'fps': args.fps, 'template': args.template,
+                                        'duration': args.duration, 'example': args.example})
     with (project / 'PROJECT.md').open('x', encoding='utf-8') as output:
         output.write('# Video project\n\n' + brief + '\n\n'
-                     + 'Delivery: {}x{}, {} fps. Template: {}.\n\n'.format(width, height, args.fps, args.template)
+                     + 'Delivery: {}x{}, {} fps. Planned duration: {} seconds. Template: {}. Example: {}.\n\n'.format(width, height, args.fps, args.duration, args.template, args.example or 'none')
                      + 'Keep editable work in source/, source assets in assets/, narration in audio/, '
                      + 'working exports in renders/, and approved exports in delivery/. Preserve earlier versions.\n')
     if args.template == 'motion':
         composition = project / 'source/motion'
         composition.mkdir()
-        replacements = {'@WIDTH@': str(width), '@HEIGHT@': str(height)}
+        replacements = {'@WIDTH@': str(width), '@HEIGHT@': str(height), '@DURATION@': str(args.duration)}
         for source, relative in template_files:
             copy_file(source, composition / relative, replacements)
         for source, relative in fonts:
             copy_file(source, composition / 'assets' / relative)
         copy_file(ROOT / 'assets/gsap.min.js', composition / 'assets/gsap.min.js')
-    print(json.dumps({'project': str(project), 'template': args.template, 'created': True}, indent=2))
+    print(json.dumps({'project': str(project), 'template': args.template, 'example': args.example, 'duration': args.duration, 'created': True}, indent=2))
     return 0
 
 
@@ -318,7 +325,12 @@ def main(argv=None):
     init.add_argument('--brief', required=True)
     init.add_argument('--size', type=size, default=(1920, 1080))
     init.add_argument('--fps', type=fps, default=30)
-    init.add_argument('--template', choices=('motion', 'empty'), default='empty')
+    init.add_argument('--template', choices=('motion', 'empty'), default='empty',
+                      help='Empty workspace (default), or unstyled browser capture scaffold')
+    init.add_argument('--duration', type=duration, default=6,
+                      help='Planned motion duration in seconds; author scene timing for the brief')
+    init.add_argument('--example', choices=('orbit-title',),
+                      help='Explicitly copy an authored study; requires --template motion')
     motion = commands.add_parser('render-motion', help='Snapshot only motion source and invoke its local renderer')
     motion.add_argument('project', type=Path)
     motion.add_argument('--output', type=Path, required=True)

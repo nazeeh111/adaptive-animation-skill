@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>3D grouping diagnostic</title><style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#161616;font:16px system-ui,sans-serif}header{height:80px;padding:20px 35px}main{display:flex;gap:30px;padding:0 30px}.case{width:340px}.case p{height:40px}.stage{position:relative;width:330px;height:250px;perspective:700px}.card{position:absolute;left:55px;top:30px;width:220px;height:160px;transform-style:preserve-3d}.face{position:absolute;width:220px;height:160px;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;color:#fff}.front{background:#2455b0;transform:translateZ(1px)}.back{background:#ba720a;transform:rotateY(180deg) translateZ(1px)}#bad{opacity:.6}#good-fade{opacity:.6}footer{padding:0 35px}
+</style><header>Same card, camera and rotation. Only fade ownership differs.</header><main>
+<section class="case"><p>Opacity on the preserve-3d element</p><div class="stage"><div id="bad" class="card"><div class="face front">FRONT</div><div class="face back">BACK</div></div></div></section>
+<section class="case"><p>Opacity outside the 3D stage</p><div id="good-fade"><div class="stage"><div id="good" class="card"><div class="face front">FRONT</div><div class="face back">BACK</div></div></div></div></section>
+</main><footer id="angle"></footer><script>
+window.draw=angle=>{document.querySelectorAll('.card').forEach(e=>e.style.transform='rotateY('+angle+'deg)');document.querySelector('#angle').textContent=angle+' degrees';};window.draw(120);
+</script></html>
