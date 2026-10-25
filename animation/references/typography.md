@@ -8,6 +8,8 @@ Distinguish display, supporting text, labels and captions with purposeful scale 
 
 When using browser fonts, declare local `@font-face` aliases; the explicit orbit-title study demonstrates this. Declare the variable weight range and `font-synthesis:none`, so missing weights are visible rather than silently synthesized. Wait for font readiness in browser inspection. Verify actual rendered fonts through browser font/DOM inspection and compare final encoded glyphs. `document.fonts.check()` alone may return true for fallback, so combine it with the loaded FontFaceSet or actual platform font evidence and visual inspection. Do not fetch Google Fonts at render time.
 
+For an interactive animation in a resizable host, inspect text at its actual displayed size. A fixed film can intentionally scale as one composition; a live explanation may need reflow, a focused view or a readable text alternative. No horizontal overflow alone does not establish readability. Keep the selected route, time and input state when the host layout changes, and inspect intermediate widths as well as endpoint sizes. Keep any preview adaptation separate from a fixed-frame capture contract.
+
 Preview h1 plus body and numeric samples at each delivery aspect ratio. Check text boxes throughout motion, not just at rest: masks and transforms can clip glyphs, and a shared background may cross behind text. Keep essential information readable within platform-specific safe areas; write these for the placement rather than assuming one universal margin. Persistent captions need enough exposure at normal narration speed. A screenshot cannot establish reading pace.
 
 ## ManimGX0.1.1 on this setup

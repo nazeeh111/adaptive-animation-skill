@@ -71,6 +71,9 @@ export ANIMATION_TEST_BROWSER=/absolute/path/to/chrome
 export ANIMATION_PLAYWRIGHT_MODULE="$(node -p "require.resolve('playwright')")"
 export ANIMATION_IMAGE_MODULE="$(node -p "require.resolve('sharp')")"
 python3 -m unittest discover -s animation/tests -p test_motion_browser.py -v
+node --test examples/causal-flow/test-preview.mjs
 ```
+
+The example test is repository-scoped and exercises readable preview reflow, input-state preservation and the separate fixed-capture contract. It skips unless the browser variable is set; it is not part of the skill-only installed folder.
 
 Run the resolution commands from the dependency-owning project; exported absolute paths remain usable from the skill repository. `ANIMATION_TEST_NODE=/absolute/path/to/node` optionally selects a different Node executable. No test downloads a browser. Read the test summary: skipped tests do not establish browser behavior. A host that denies a local test server/browser needs its normal scoped permission route.

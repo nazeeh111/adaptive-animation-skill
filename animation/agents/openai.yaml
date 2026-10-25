@@ -1,4 +1,4 @@
 interface:
   display_name: "Animation"
-  short_description: "Create, edit and animate video with an adaptive workflow"
-  default_prompt: "Use $animation to complete this video, editing, animation or YouTube task with suitable creative direction, native tools and verified deliverables."
+  short_description: "Create adaptive animation and editable motion design"
+  default_prompt: "Use $animation to complete this animation, motion design, visual asset, video or editing task with suitable creative direction, native tools and verified deliverables."

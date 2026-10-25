@@ -3,6 +3,10 @@
 <title>A signal finds a route</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#12282c;color:#EEF4F5;font-family:system-ui,sans-serif}main{width:960px;height:540px;position:relative;overflow:hidden;padding:42px 48px;background:#12282c}h1{font-size:42px;line-height:1.1;letter-spacing:-1.4px;font-weight:550;margin:0}p{color:#b7c6c4;margin:13px 0;font-size:17px}svg{position:absolute;left:48px;top:140px;width:864px;height:290px;overflow:visible}path{fill:none;stroke:#506165;stroke-width:2.5}path.active{stroke:#D9E86D;stroke-width:4}rect{fill:#1d383d;stroke:#718488;stroke-width:1.5}text{fill:#EEF4F5;font-size:18px;text-anchor:middle;dominant-baseline:middle}.small{font-size:13px;fill:#b7c6c4}.foot{position:absolute;bottom:32px;left:48px;right:48px;display:flex;justify-content:space-between;font-size:16px}.foot span:last-child{color:#b7c6c4}nav{padding:16px 48px;display:flex;gap:12px;align-items:center;max-width:960px}button,input{font:inherit}button{padding:8px 14px;color:#12282c;background:#EEF4F5;border:0;border-radius:3px}button:focus-visible,input:focus-visible{outline:3px solid #D9E86D;outline-offset:3px}input{flex:1;accent-color:#D9E86D}output{min-width:55px}nav[hidden]{display:none}
+
+/* Native responsive preview: recompose topology instead of shrinking typography. */
+body.preview{min-width:0}body.preview main{width:min(960px,100%)}
+@media(max-width:959px){body.preview main{height:auto;padding:24px}body.preview h1{font-size:32px;letter-spacing:-.7px}body.preview p{line-height:1.45}body.preview svg{position:relative;left:auto;top:auto;width:100%;height:auto;aspect-ratio:272 / 480;max-width:400px;display:block;margin:24px auto 0}body.preview .foot{position:static;display:block;line-height:1.45;margin-top:18px}body.preview .foot span{display:block}body.preview .foot span:last-child{font-size:13px;margin-top:8px}body.preview nav{padding:16px 24px;flex-wrap:wrap}body.preview nav input{min-width:100px}}
 </style>
 <main id="causal" data-composition-id="causal" data-start="0" data-duration="8" data-width="960" data-height="540" aria-label="Illustrative signal routing explanation">
 <h1>A signal finds a route</h1><p>The decision changes the path. The destination stays clear.</p>
@@ -16,13 +20,14 @@
 <g id="decision"><rect x="288" y="111" width="120" height="66" rx="8"/><text x="348" y="144">Decision</text></g>
 <g id="review"><rect x="548" y="19" width="120" height="66" rx="8"/><text x="608" y="52">Review</text></g>
 <g id="delivery"><rect x="730" y="111" width="124" height="66" rx="8"/><text x="792" y="144">Delivery</text></g>
-<text class="small" x="485" y="13">Needs review</text><text class="small" x="535" y="271">Direct route</text>
+<text id="review-label" class="small" x="485" y="13">Needs review</text><text id="direct-label" class="small" x="535" y="271">Direct route</text>
 
 </svg>
 <div class="foot"><span id="caption">The signal enters.</span><span>Illustrative timing</span></div>
 </main>
 <nav id="controls" hidden aria-label="Animation controls"><button id="play" aria-pressed="false">Play</button><button id="restart">Restart</button><button id="route">Use direct route</button><input id="seek" aria-label="Time in seconds" type="range" min="0" max="8" step="0.01" value="0"><output id="time">0.00 s</output></nav>
 <script>
+const previewMode=new URLSearchParams(location.search).get('preview')==='1';document.body.classList.toggle('preview',previewMode);
 const token=document.querySelector('#token'),caption=document.querySelector('#caption'),seek=document.querySelector('#seek'),time=document.querySelector('#time');
 let current=0,needsReview=true,playing=false,last=0,raf=0;
 const clamp=n=>Math.max(0,Math.min(1,n));const ease=n=>{n=clamp(n);return n*n*(3-2*n)};
@@ -35,8 +40,8 @@ window.renderFrame=function(seconds){
  for(const [id,active] of [['decision',current>=2.1&&current<3.1],['review',needsReview&&current>=4.5&&current<5.7],['delivery',current>=6.9]]){const rect=document.querySelector('#'+id+' rect');rect.style.stroke=active?'#D9E86D':'#718488';rect.style.strokeWidth=active?'3':'1.5';}
  if(current<2.4){p=point('guide-incoming',(current-.7)/1.7);caption.textContent=current<.7?'The signal enters.':'The signal reaches the decision.';}
  else if(needsReview&&current<5){p=point('guide-review',(current-2.7)/1.8);caption.textContent='This signal needs a review.';}
- else if(needsReview){p=point('guide-reviewed',(current-5.3)/1.6);caption.textContent=current<7?'Review clears the path to delivery.':'The signal arrives. The route remains visible.';}
- else{p=point('guide-direct',(current-2.7)/3.8);caption.textContent=current<7?'This signal takes the direct route.':'The signal arrives. The route remains visible.';}
+ else if(needsReview){p=point('guide-reviewed',(current-5.3)/1.6);caption.textContent=current<7?'Review clears the path to delivery.':(previewMode?'Review clears this signal. It reaches Delivery.':'The signal arrives. The route remains visible.');}
+ else{p=point('guide-direct',(current-2.7)/3.8);caption.textContent=current<7?'This signal takes the direct route.':(previewMode?'This signal skips Review and reaches Delivery.':'The signal arrives. The route remains visible.');}
  token.setAttribute('cx',p.x);token.setAttribute('cy',p.y);seek.value=current;time.textContent=current.toFixed(2)+' s';
 };
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
@@ -46,7 +51,16 @@ function play(){if(preference.matches)return;playing=true;last=performance.now()
 function motionPreference(){if(preference.matches){stop();renderFrame(8);}document.querySelector('#play').disabled=preference.matches;}
 if(new URLSearchParams(location.search).get('preview')==='1'){
  document.querySelector('#controls').hidden=false;
- function fit(){const scale=Math.min(1,innerWidth/960);const main=document.querySelector('main');main.style.transformOrigin='top left';main.style.transform='scale('+scale+')';main.style.marginBottom=(540*(scale-1))+'px';document.querySelector('#controls').style.width='100%';document.querySelector('#controls').style.padding='16px';document.querySelector('#controls').style.flexWrap='wrap';}
+ function fit(){
+ const mobile=innerWidth<960,svg=document.querySelector('svg');svg.setAttribute('viewBox',mobile?'0 0 272 480':'0 0 864 290');
+ const nodes=mobile?{source:[136,33],decision:[136,158],review:[208,298],delivery:[136,438]}:{source:[82,144],decision:[348,144],review:[608,52],delivery:[792,144]};
+ for(const [id,[x,y]] of Object.entries(nodes)){const g=document.querySelector('#'+id),r=g.querySelector('rect'),t=g.querySelector('text'),w=Number(r.getAttribute('width'));r.setAttribute('x',x-w/2);r.setAttribute('y',y-33);t.setAttribute('x',x);t.setAttribute('y',y);}
+ const mobilePaths={incoming:'M136 66 L136 125','review-path':'M136 191 C136 230 208 225 208 265','direct-path':'M76 158 L32 158 L32 438 L74 438','review-delivery':'M208 331 L208 372 C208 401 136 390 136 405','guide-incoming':'M136 33 L136 158','guide-review':'M136 158 L136 191 C136 230 208 225 208 265 L208 298','guide-reviewed':'M208 298 L208 372 C208 401 136 390 136 405 L136 438','guide-direct':'M136 158 L32 158 L32 438 L136 438'};
+ const desktopPaths={incoming:'M144 144 L288 144','review-path':'M408 144 C460 144 450 52 508 52 L548 52','direct-path':'M408 144 C460 144 450 238 508 238 L608 238 C684 238 680 144 730 144','review-delivery':'M668 52 C720 52 680 144 730 144','guide-incoming':'M82 144 L348 144','guide-review':'M348 144 L408 144 C460 144 450 52 508 52 L608 52','guide-reviewed':'M608 52 L668 52 C720 52 680 144 730 144 L792 144','guide-direct':'M348 144 L408 144 C460 144 450 238 508 238 L608 238 C684 238 680 144 730 144 L792 144'};
+ for(const [id,d] of Object.entries(mobile?mobilePaths:desktopPaths))document.querySelector('#'+id).setAttribute('d',d);
+ for(const [id,x,y] of mobile?[['review-label',195,225],['direct-label',58,362]]:[['review-label',485,13],['direct-label',535,271]]){const t=document.querySelector('#'+id);t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('transform',mobile&&id==='direct-label'?'rotate(-90 58 362)':'');}
+ renderFrame(current);
+}
  fit();addEventListener('resize',fit);
  document.querySelector('#play').onclick=()=>{if(playing)stop();else{if(current>=8)renderFrame(0);play();}};
  document.querySelector('#restart').onclick=()=>{stop();renderFrame(preference.matches?8:0);};

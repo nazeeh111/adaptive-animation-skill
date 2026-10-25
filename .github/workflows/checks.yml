@@ -1,0 +1,54 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  helpers-and-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Prepare media and browser dependencies
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg
+          mkdir -p "$RUNNER_TEMP/animation-test-deps"
+          npm --prefix "$RUNNER_TEMP/animation-test-deps" install --no-save --package-lock=false playwright@1.62.1 sharp@0.35.5
+          animation_chrome_path="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$animation_chrome_path"
+          printf 'ANIMATION_TEST_BROWSER=%s\n' "$animation_chrome_path" >> "$GITHUB_ENV"
+          node <<'JS'
+          const fs=require('node:fs'),path=require('node:path');
+          const options={paths:[path.join(process.env.RUNNER_TEMP,'animation-test-deps')]};
+          fs.appendFileSync(process.env.GITHUB_ENV,
+            `ANIMATION_PLAYWRIGHT_MODULE=${require.resolve('playwright',options)}\n`+
+            `ANIMATION_IMAGE_MODULE=${require.resolve('sharp',options)}\n`);
+          JS
+      - name: Python and actual browser helpers
+        run: python -m unittest discover -s animation/tests -v
+      - name: Independent spring dynamics
+        run: node --test animation/tests/test_retargeted_spring.mjs
+      - name: Responsive example receiving contract
+        run: node --test examples/causal-flow/test-preview.mjs
